@@ -26,7 +26,31 @@ Why is it important?
 \section{Main problems and solutions}
 
 \textit{
-At first ther was some gaps in tha code that one had to fill in.
+At first there was some gaps in the code that one had to fill.
+This had to be done in order to make the server work at all.
+There where also a test provided at the course web.
+This when running this this module an error was raised if one made several requests in a row.
+This problem was solved by closing the tcp connection after each request.
+Of course this is nothing new, but it was a problem because we thought that the provided module was stable.
+However the problem still exist when one makes a huge number of requests in a row.
+To prevent that such problems one could set a limit of the number of request.
+One could also use the sleep function as suggested in the lab manual.
+
+
+
+Now, how many request per second can we serve?
+
+Is our artificial delay significant or does it disappear in the parsing overhead? 
+
+What happens if you run the benchmarks on several machines at the same time? 
+
+Run some tests and report your findings.
+
+
+
+
+
+
 Summarize your problems, proposed solutions, etc. You do not
   need to copy\&paste your code. Only if needed, you may write down
   small code snipeds to show how you have solved a specific
@@ -122,10 +146,16 @@ Case 3 & 3.1 & 3.2\\\hline
 
 \section{Conclusions}
 
+
+
 \textit{Change the layout of this template as you want. It's only for
   your guidance but if you feel that you need a different structure,
   feel free to change it. The report should not be too long ($\approx$
   2-3 pages).}
+
+To make the server more work more efficient it would be a good idea ta spawn the handling of each tcp connection in a new process.
+It should also in some situations if there e.g. is very heavy load on the server it would be great idea to let a different node handle the requests.
+
 
 What have you learnt from the problem presented?
 Was it useful?
