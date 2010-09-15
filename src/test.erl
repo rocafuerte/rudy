@@ -4,8 +4,9 @@
 bench(Host, Port, N) ->
     Start = now(),
     run(N, Host, Port),
-    Finish = now(),    
-    timer:now_diff(Finish, Start).
+    Finish = now(),
+    Time=timer:now_diff(Finish, Start).
+%file:write_file("output.txt",Time,[append]).
 
 run(N, Host, Port) ->
     if

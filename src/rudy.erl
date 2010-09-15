@@ -9,7 +9,7 @@
 
 -export([start/0,stop/0,init/1]).
 
-start() ->    
+start() ->
     Port=8080,
     register(rudy, spawn(fun() ->
 				 rudy:init(Port) end)).
@@ -20,15 +20,6 @@ stop() ->
     %spawn(rudy, init, [self()]).
 
 
-%init(From) ->
-%    loop(From).
-
-loop(From) ->
-    receive
-	_ ->
-	    loop(From)
-    end.
-
 init(Port) ->    
     io:format("Waiting for connectins at port ~p~n",[Port]),
     Opt = [list, {active, false}, {reuseaddr, true}],
@@ -36,7 +27,7 @@ init(Port) ->
 	{ok, LSock} ->
 	    handler(LSock),	    
 	    ok = gen_tcp:close(LSock);
-	{error, Error} ->
+	{error, _Error} ->
 	     error
     end.
 
@@ -47,7 +38,7 @@ handler(Listen) ->
 	    request(Client),
 	    %io:format("spawned ~p~n",[CPid]),
 	    handler(Listen);
-	{error, Error} ->
+	{error, _Error} ->
 	    error
     end.
 
@@ -64,6 +55,6 @@ request(Client) ->
     gen_tcp:close(Client).
 
 
-reply({{get, URI, _}, _, _Body}) -> 
-    timer:sleep(0),
+reply({{get, _URI, _}, _, _Body}) -> 
+    timer:sleep(40),
     http:ok("flaskhals").
