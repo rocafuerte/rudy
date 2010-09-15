@@ -153,8 +153,14 @@ Case 3 & 3.1 & 3.2\\\hline
   feel free to change it. The report should not be too long ($\approx$
   2-3 pages).}
 
-To make the server more work more efficient it would be a good idea ta spawn the handling of each tcp connection in a new process.
-It should also in some situations if there e.g. is very heavy load on the server it would be great idea to let a different node handle the requests.
+To make the server more work more efficiently handle requests it would be a good idea ta spawn the handling of each tcp connection in a new process.
+Yhis would make an improvement.
+If there are several clients requesting the server and the first one requests for a large amount of data, without spawning the following clients would have to wait för the first one to be handled. 
+If the srvern spawns the requests erlang has the ability to switch between connections and may be able to handle other requests before the first one is finished.
+Morover, if the machine has multicore support, the server could handle several requests in parallell.
+
+If there e.g. is very heavy load on the server it could be good idea to let a different node handle the requests.
+This is easely mad in Erlang.
 
 
 What have you learnt from the problem presented?
